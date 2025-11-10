@@ -94,7 +94,7 @@ class ProfileForm(FlaskForm):
 def home():
     return "<h1>Página Inicial</h1><p><a href='/login'>Login</a> ou <a href='/register'>Registre-se</a></p>"
 
-# (Adicione uma rota de registro para poder testar)
+# rota de registro
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -110,7 +110,7 @@ def register():
         db.session.commit()
         flash('Sua conta foi criada! Você já pode fazer login.', 'success')
         return redirect(url_for('login'))
-    # (Você precisará criar o template 'register.html')
+    # template de registro 'register.html'
     return render_template('register.html', title='Registrar', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -125,7 +125,7 @@ def login():
             return redirect(url_for('dashboard'))
         else:
             flash('Login sem sucesso. Verifique o email e a senha.', 'danger')
-    # (Você precisará criar o template 'login.html')
+    # template de login 'login.html'
     return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
@@ -138,7 +138,7 @@ def logout():
 @app.route("/dashboard")
 @login_required # <-- Mágica do Flask-Login!
 def dashboard():
-    # (Você precisará criar o template 'dashboard.html')
+    # template de dashboard 'dashboard.html'
     return render_template('dashboard.html', title='Dashboard')
 
 @app.route("/profile", methods=['GET', 'POST'])
@@ -148,7 +148,6 @@ def profile():
     if form.validate_on_submit():
         # --- Lógica de upload da foto ---
         if form.picture.data:
-            # (Opcional: apagar a foto antiga se não for a default)
             if current_user.imagem_perfil != 'default.jpg':
                 try:
                     os.remove(os.path.join(app.root_path, 'static/profile_pics', current_user.imagem_perfil))
