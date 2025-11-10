@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div>
+        <h1>Registrar Nova Conta</h1>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            
+            <fieldset>
+                <div class="form-group">
+                    {{ form.nome_completo.label }}
+                    {{ form.nome_completo() }}
+                </div>
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username() }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {{ form.email() }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label }}
+                    {{ form.password() }}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label }}
+                    {{ form.confirm_password() }}
+                </div>
+            </fieldset>
+            
+            <div class="form-group">
+                {{ form.submit() }}
+            </div>
+        </form>
+    </div>
+    <br>
+    <div>
+        <small>
+            Já tem uma conta? <a href="{{ url_for('login') }}">Faça Login</a>
+        </small>
+    </div>
+{% endblock content %}

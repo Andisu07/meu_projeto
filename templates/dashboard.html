@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Dashboard</h1>
+    
+    {% set image_file = url_for('static', filename='profile_pics/' + current_user.imagem_perfil) %}
+    
+    <img src="{{ image_file }}" alt="Imagem de Perfil" 
+         style="width: 125px; height: 125px; border-radius: 50%; margin-bottom: 20px; object-fit: cover;">
+
+    <h2>Bem-vindo(a) de volta, {{ current_user.nome_completo }}!</h2>
+    
+    <p>Esta é a sua área restrita. Suas informações:</p>
+    <ul>
+        <li><strong>Username:</strong> {{ current_user.username }}</li>
+        <li><strong>Email:</strong> {{ current_user.email }}</li>
+        <li><strong>Membro desde:</strong> {{ current_user.data_criacao.strftime('%d/%m/%Y') }}</li>
+        <li><strong>Descrição:</strong> {{ current_user.descricao or 'Nenhuma descrição definida.' }}</li>
+    </ul>
+
+    <hr>
+
+    <h3>Menu de Opções do Usuário:</h3>
+    <ul>
+        <li><a href="{{ url_for('profile') }}">Editar Perfil e Informações</a></li>
+        <li><a href="#">Alterar Senha</a> (Funcionalidade a ser criada)</li>
+    </ul>
+{% endblock content %}
